@@ -1,13 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"main/internal/hell"
 	"math"
-	"runtime"
 )
 
 func main() {
-	totalNonce, totalWorkers := math.MaxInt64, runtime.NumCPU()
+	totalNonce, totalWorkers := int64(math.MaxInt64), 10
 
-	<-hell.StartFire(totalNonce, totalWorkers)
+	hellExecution := hell.StartFire(totalNonce, totalWorkers)
+
+	for {
+		select {
+		case nonceData := <-hellExecution.OnNonceFound:
+			fmt.Println("NONCE FOUNDED", nonceData)
+		case <-hellExecution.OnAllFinished:
+			fmt.Println("ALL WAS FINISHED")
+			return
+		}
+	}
 }
