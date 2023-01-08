@@ -19,7 +19,7 @@ func (devilInstance *devil) enslaveDevil(hellContextInstance *hellContext, start
 		if i == 1000 {
 			hellContextInstance.nonceFoundChannel <- &NonceData{
 				Nonce: int64(i),
-				Hash:  make([]byte, 0),
+				Hash:  make([]byte, 32),
 			}
 
 			hellContextInstance.stopHell()
