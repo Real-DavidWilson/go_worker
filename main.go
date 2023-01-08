@@ -2,13 +2,12 @@ package main
 
 import (
 	"main/internal/hell"
+	"math"
 	"runtime"
 )
 
 func main() {
-	totalNonce, totalWorkers := 100, runtime.NumCPU()
+	totalNonce, totalWorkers := math.MaxInt64, runtime.NumCPU()
 
-	hellOnFire := hell.StartFire(totalNonce, totalWorkers)
-
-	<-hellOnFire
+	<-hell.StartFire(totalNonce, totalWorkers)
 }

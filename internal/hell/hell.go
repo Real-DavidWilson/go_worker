@@ -6,6 +6,24 @@ type hellContext struct {
 	devils []*devilContext
 }
 
+func newHellContext() hellContext {
+	return hellContext{
+		devils: make([]*devilContext, 0),
+	}
+}
+
+func (hellContextInstance *hellContext) CreateDevilContext() chan bool {
+	gate := make(chan bool)
+
+	devilContext := &devilContext{
+		gate: gate,
+	}
+
+	hellContextInstance.devils = append(hellContextInstance.devils, devilContext)
+
+	return gate
+}
+
 func StartFire(numNonce int, numDevils int) chan bool {
 	hellContextInstance := newHellContext()
 
