@@ -4,7 +4,7 @@ import "sync"
 
 type NonceData struct {
 	Nonce int64
-	Hash  []byte
+	Hash  [32]byte
 }
 
 type HellExecution struct {
