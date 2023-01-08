@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"main/internal/hell"
 	"math"
+	"runtime"
 )
 
 func main() {
-	totalNonce, totalWorkers := int64(math.MaxInt64), 10
+	totalNonce, totalWorkers := int64(math.MaxInt64), runtime.NumCPU()
 
 	hellExecution := hell.StartFire(totalNonce, totalWorkers)
 
